@@ -11,13 +11,22 @@ class Mapa extends StatefulWidget {
 
 class _MapaState extends State<Mapa> {
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> _marcadores = {};
 
   _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
 
   _exibirMarcador(LatLng latLng) {
-    print("Local clicado: $latLng");
+    // print("Local clicado: $latLng");
+    Marker marcador = Marker(
+      markerId: MarkerId("marcador-${latLng.latitude}-${latLng.longitude}"),
+      position: latLng,
+      infoWindow: InfoWindow(title: "marcador"),
+    );
+    setState(() {
+      _marcadores.add(marcador);
+    });
   }
 
   @override
@@ -34,6 +43,7 @@ class _MapaState extends State<Mapa> {
         mapType: MapType.normal,
         onMapCreated: _onMapCreated,
         onLongPress: _exibirMarcador,
+        markers: _marcadores,
       ),
     );
   }
