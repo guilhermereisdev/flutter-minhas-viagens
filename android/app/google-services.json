@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1088108755122",
+    "project_id": "minhas-viagens-322501",
+    "storage_bucket": "minhas-viagens-322501.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088108755122:android:64a4c26e21c81314e8b1ab",
+        "android_client_info": {
+          "package_name": "com.guilhermereis.minhasviagens.minhas_viagens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088108755122-vm2r5jacvfkfs61o49mmkajj3h9gas8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guilhermereis.minhasviagens.minhas_viagens",
+            "certificate_hash": "21ccc6bd778472a01997141d46425b3cdc9d59d2"
+          }
+        },
+        {
+          "client_id": "1088108755122-qg4tje9frl8oeg0bf841hu9nhjgh51r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARJGELnJOySYMDXn_YDJXAPLkEOJGK_Ow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088108755122-qg4tje9frl8oeg0bf841hu9nhjgh51r2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1088108755122-b21c8uoja3kc5i4vsdh9h84ik3gmas4l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.guilhermereis.minhasviagens.minhasViagens"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
