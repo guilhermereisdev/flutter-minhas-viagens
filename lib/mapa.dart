@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -20,12 +21,13 @@ class _MapaState extends State<Mapa> {
     target: LatLng(-23.562436, -46.655005),
     zoom: 18,
   );
+  FirebaseFirestore _db = FirebaseFirestore.instance;
 
   _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
 
-  _exibirMarcador(LatLng latLng) async {
+  _adicionarMarcador(LatLng latLng) async {
     List<Placemark> listaEnderecos =
         await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
     if (listaEnderecos.isNotEmpty) {
@@ -52,6 +54,16 @@ class _MapaState extends State<Mapa> {
       );
       setState(() {
         _marcadores.add(marcador);
+        // Salvar no Firebase
+        Map<String, dynamic> viagem = Map();
+        viagem["rua"] = rua;
+        viagem["numero"] = numero;
+        viagem["cidade"] = cidade;
+        viagem["latitude"] = latLng.latitude;
+        viagem["longitude"] = latLng.longitude;
+
+        _db.collection("viagens").add(viagem);
+
         print("rua: $rua"
             "\nnumero: $numero"
             "\nbairro: $bairro"
@@ -134,7 +146,7 @@ class _MapaState extends State<Mapa> {
         initialCameraPosition: _posicaoCamera,
         mapType: MapType.normal,
         onMapCreated: _onMapCreated,
-        onLongPress: _exibirMarcador,
+        onLongPress: _adicionarMarcador,
         markers: _marcadores,
         myLocationEnabled: true,
       ),
