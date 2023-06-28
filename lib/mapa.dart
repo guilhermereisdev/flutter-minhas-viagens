@@ -87,6 +87,35 @@ class _MapaState extends State<Mapa> {
     });
   }
 
+  _recuperaViagemPeloID(String? idViagem) async {
+    if (idViagem != null) {
+      DocumentSnapshot documentSnapshot =
+          await _db.collection("viagens").doc(idViagem).get();
+      var dados = documentSnapshot;
+      String rua = dados["rua"];
+      String numero = dados["numero"];
+      String cidade = dados["cidade"];
+      LatLng latLng = LatLng(dados["latitude"], dados["longitude"]);
+      setState(() {
+        Marker marcador = Marker(
+          markerId: MarkerId("marcador-${latLng.latitude}-${latLng.longitude}"),
+          position: latLng,
+          infoWindow: InfoWindow(
+            title: "$rua, $numero - $cidade",
+          ),
+        );
+        _marcadores.add(marcador);
+        _posicaoCamera = CameraPosition(
+          target: latLng,
+          zoom: 18,
+        );
+        _movimentarCamera();
+      });
+    } else {
+      _adicionarListenerLocalizacao();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
