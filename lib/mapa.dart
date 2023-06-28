@@ -5,7 +5,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Mapa extends StatefulWidget {
-  const Mapa({super.key});
+  Mapa({super.key, this.idViagem});
+
+  final String? idViagem;
 
   @override
   State<Mapa> createState() => _MapaState();
@@ -119,7 +121,7 @@ class _MapaState extends State<Mapa> {
   @override
   void initState() {
     super.initState();
-    _adicionarListenerLocalizacao();
+    _recuperaViagemPeloID(widget.idViagem);
   }
 
   @override
